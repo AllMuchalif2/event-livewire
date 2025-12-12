@@ -15,27 +15,40 @@ class UserSeeder extends Seeder
         // Admin default - untuk akses Filament panel
         \App\Models\User::create([
             'name' => 'Admin Utama',
+            'username' => 'admin',
             'email' => 'admin@event.test',
             'email_verified_at' => now(),
             'password' => bcrypt('password'), // Password: password
             'role' => 'admin',
         ]);
 
-        // Participant default - untuk testing registrasi event
+        // Participant Mahasiswa - untuk testing (dengan NIM)
         \App\Models\User::create([
-            'name' => 'John Doe',
-            'email' => 'participant@event.test',
+            'name' => 'Budi Santoso',
+            'username' => '22.123.4567', // NIM format
+            'email' => 'budi@student.test',
             'email_verified_at' => now(),
             'password' => bcrypt('password'), // Password: password
             'role' => 'participant',
         ]);
 
-        $this->command->info('✅ User seeder berhasil! Admin dan Participant telah dibuat.');
+        // Participant Umum - untuk testing (auto-generated)
+        \App\Models\User::create([
+            'name' => 'John Doe',
+            'username' => 'umum-001', // Auto-generated format
+            'email' => 'john@public.test',
+            'email_verified_at' => now(),
+            'password' => bcrypt('password'), // Password: password
+            'role' => 'participant',
+        ]);
+
+        $this->command->info('✅ User seeder berhasil! Users telah dibuat dengan username.');
         $this->command->table(
-            ['Role', 'Email', 'Password'],
+            ['Role', 'Username', 'Email', 'Password'],
             [
-                ['admin', 'admin@event.test', 'password'],
-                ['participant', 'participant@event.test', 'password'],
+                ['admin', 'admin', 'admin@event.test', 'password'],
+                ['mahasiswa', '22.123.4567', 'budi@student.test', 'password'],
+                ['umum', 'umum-001', 'john@public.test', 'password'],
             ]
         );
     }

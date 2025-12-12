@@ -22,6 +22,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'username', // NIM atau umum-XXX
         'password',
         'role', // Tambah role ke fillable
     ];
